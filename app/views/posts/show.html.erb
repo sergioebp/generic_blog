@@ -1,0 +1,63 @@
+<h6>post made by <%= @author.name %></h6><h6> Rate: <%= @post.rates.average(:value).round(2) %></h6>
+<%= link_to 'Back', posts_path, class: 'btn btn-primary' %>
+
+<%# Blog %>
+
+<div class="container">
+  <h1><%= @post.title %></h1>
+  <% @post.elements.each do |element| %>
+    <% if element.paragraph? %>
+      <div class="mb-4 p-3">
+        <%= element.content %>
+      </div>
+    <% elsif element.image %>
+      <div class="mb-4 p-3 image">
+        <%= image_tag(element.image) %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<%# Rating %>
+
+<div class="">
+  <h6>Rate this Post:</h6>
+  <%= form_with(url: rate_post_url(@post)) do |form| %>
+    <%= select(:rate, :value, [[1, 1], [2, 2], [3,3], [4,4], [5,5], [6,6], [7,7], [8,8], [9,9], [10,10]]) %>
+    <%= form.submit "Submit", class: 'btn btn-primary' %>
+  <% end %>
+</div>
+
+
+
+
+<br>
+<hr>
+<br>
+<%# Comments %>
+
+<div class="container">
+  <div class="roaa">
+    <%= form_with(model: [@post, @post.comments.build]) do |form| %>
+      <%= form.rich_text_area :content %>
+      <%= form.submit "Post Comment", class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+  <br>
+  <hr>
+  <br>
+  <% @post.comments.each do |comment| %>
+    <% if comment.persisted? %>
+      <h5><%= comment.author&.name %> Says:</h5>
+      <h6><%= raw comment.content %></h6>
+      <div class="">
+        <h6>Rate this Comment:</h6>
+        <%= form_with(url: rate_post_comment_url(@post, comment)) do |form| %>
+          <%= select(:rate, :value, [[1, 1], [2, 2], [3,3], [4,4], [5,5], [6,6], [7,7], [8,8], [9,9], [10,10]]) %>
+          <%= form.submit "Submit", class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+      <hr>
+    <% end %>
+  <% end %>
+</div>
