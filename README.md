@@ -1,24 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Aplicación web que posee funcionalidades básicas y típicas de un Blog.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+La aplicación funciona con la base de datos PostgresQL, para evitar problemas de compatibilidad recomiendo el uso de Docker postgres.

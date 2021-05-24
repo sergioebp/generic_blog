@@ -1,4 +1,7 @@
-<h6>post made by <%= @author.name %></h6><h6> Rate: <%= @post.rates.average(:value).round(2) %></h6>
+<h6>post made by <%= @author.name %></h6>
+<h6>Rate: <% if @post.rates.any? %>
+   <%= @post.rates.average(:value).round(2) %>
+ <% end %> </h6>
 <%= link_to 'Back', posts_path, class: 'btn btn-primary' %>
 
 <%# Blog %>

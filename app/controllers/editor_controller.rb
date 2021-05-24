@@ -7,4 +7,5 @@ class EditorController < ApplicationController
   def validate_editor
     raise StandardError.new("user_invalid id: #{current_author.id}") if current_author.role != "editor"
   end
+  
 end
