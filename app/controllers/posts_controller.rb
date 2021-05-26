@@ -1,5 +1,6 @@
   class PostsController < ApplicationController
     before_action :set_post, only: [:edit, :update, :destroy, :rate]
+    before_action :authenticate_author!
 
     # GET /posts
     def index
